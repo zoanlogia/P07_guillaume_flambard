@@ -1,0 +1,42 @@
+.tags__container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  .tag {
+    margin: 1em 1em 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    color: white;
+    width: fit-content;
+    cursor: pointer;
+    padding: 5px;
+
+    span {
+      padding: 10px;
+      font-size: x-small;
+      font-weight: 700;
+    }
+
+    span::first-letter {
+      text-transform: capitalize;
+    }
+
+    img {
+      padding: 10px;
+    }
+  }
+
+  .blue {
+    background-color: #3282f7;
+  }
+
+  .green {
+    background-color: #68d9a4;
+  }
+
+  .orange {
+    background-color: #ed6454;
+  }
+}

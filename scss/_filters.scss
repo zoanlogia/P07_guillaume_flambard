@@ -1,0 +1,46 @@
+.select__container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  #selectIngredient {
+    background-color: #3282f7;
+  }
+
+  #selectUstensils {
+    background-color: #ed6454;
+  }
+
+  #selectAppliances {
+    background-color:
+      #68d9a4;
+  }
+
+  .select {
+    width: auto;
+    margin: 1em 1em 0 0;
+    //  condition pour gérer la couleur
+
+    padding: 1em;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+
+    & .arrow {
+      display: inline-block;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .arrow.active {
+      transform: rotate(180deg);
+    }
+
+    &__list {
+      cursor: pointer;
+      max-height: 20rem;
+      height: auto;
+      overflow-y: scroll;
+      color: white;
+    }
+  }
+}
