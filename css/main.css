@@ -143,6 +143,25 @@ table {
 }
 
 /** @format */
+.error {
+  width: 500px;
+  height: 150px;
+  margin: auto;
+  text-align: center;
+  line-height: 150px;
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: #f44336;
+  border-radius: 5px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 100;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .recipes__container {
   display: flex;
   align-items: center;
@@ -154,19 +173,6 @@ table {
   .recipes__container {
     justify-content: center;
   }
-}
-.recipes__container .error {
-  margin: 5em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  font-size: 1.5rem;
-  color: #fff;
-  background-color: #f44336;
-  border-radius: 5px;
-  padding: 1rem;
 }
 .recipes__container .card {
   margin: 1em 0;

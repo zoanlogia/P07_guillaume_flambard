@@ -1,12 +1,10 @@
-import { getLocaleStorage, setLocaleStorage } from "./utils/storage.js";
 import startAlgo from "./startAlgo.js";
 import { displayCards, displaySelects } from "./utils/ui.js";
-import { isShow } from "./utils/display.js";
-import recipes from "../data/recipes.js"
+import { initRecipes } from "./utils/initShow.js";
+
 (() => {
-  setLocaleStorage(recipes)
-  isShow(getLocaleStorage())
-  displayCards(getLocaleStorage());
+  initRecipes()
+  displayCards();
   displaySelects();
   startAlgo();
 })();

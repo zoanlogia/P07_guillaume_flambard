@@ -1,4 +1,5 @@
 import { card } from "../components/card.js";
+import { errorMessage } from "../components/error.js";
 import {
   generateAppliancesList,
   generateAppliancesSelect,
@@ -10,16 +11,28 @@ import {
 import { getLocaleStorage } from "./storage.js";
 
 
-export const displayCards = (recipes) => {
-  recipes = getLocaleStorage()
+/**
+ * It displays the cards in the recipes container
+ * @returns The dom is being returned.
+ */
+export const displayCards = () => {
+  const data = getLocaleStorage()
   const cardsContainer = document.querySelector(".recipes__container");
   cardsContainer.innerHTML = "";
-  recipes.forEach((recipe) => {
-      cardsContainer.innerHTML += card(recipe);
+  data.forEach((recipe) => {
+    cardsContainer.innerHTML += card(recipe);
   });
+  if (cardsContainer.innerHTML === "") {
+    cardsContainer.append(errorMessage());
+  }
 };
 
 
+/**
+ * It takes the ingredients, appliances and ustensils lists and generates a select element for each of
+ * them
+ * @returns The dom is being returned.
+ */
 export const displaySelects = () => {
   const dom = document.querySelector(".select__container");
   const ingredientSelect = generateIngredientsSelect(generateIngredientsList());
