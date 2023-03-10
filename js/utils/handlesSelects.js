@@ -1,6 +1,6 @@
 import { createTagsAppliances, createTagsIngredients, createTagsUstensils } from "../components/tag.js";
-// import { handleTagIngredients } from "./handleTags.js";
-// import { handleIngredientTag as handleIngredientTag } from "./handleTags.js";
+import { handleIngredientsTag } from "./handleTags.js";
+// import { handleTags } from "./handleTags.js";
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
 import { displayCards } from "./ui.js";
 
@@ -39,19 +39,20 @@ export const handleIngredientSelect = () => {
       }
       const data = getLocaleStorage();
       const ingredients = [...new Set(data.map((ingredient) => ingredient.ingredients.flatMap((ing) => ing.ingredient.toLowerCase())))].flat();
-      if (ingredients.includes(li.dataset.value.toLowerCase())) {
+      if (ingredients.includes(li.dataset.value)) {
         li.style.display = "none";
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
             const allIng = recipe.ingredients.map((ing) => ing.ingredient.toLowerCase())
-            recipe.isShow = allIng.includes(li.dataset.value.toLowerCase())
+            recipe.isShow = allIng.includes(li.dataset.value)
           }
           return recipe
         });
         setLocaleStorage(newData);
         displayCards();
         createTagsIngredients(li.dataset.value)
-        // handleTagIngredients(li.dataset.value);
+        // handleTags();
+        handleIngredientsTag();
       }
     });
   });
@@ -76,19 +77,21 @@ export const handleUstensilsSelect = () => {
 
       const data = getLocaleStorage();
       const ustensils = [...new Set(data.map((ustensil) => ustensil.ustensils.flatMap(ust => ust.toLowerCase())))].flat();
-      if (ustensils.includes(li.dataset.value.toLowerCase())) {
+      if (ustensils.includes(li.dataset.value)) {
         li.style.display = "none";      
         createTagsUstensils(li.dataset.value)
         
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
             const allUstensils = recipe.ustensils.map((ustensil) => ustensil.toLowerCase())
-            recipe.isShow = allUstensils.includes(li.dataset.value.toLowerCase())
+            recipe.isShow = allUstensils.includes(li.dataset.value)
           }
           return recipe
         })
         setLocaleStorage(newData);
         displayCards();
+        createTagsUstensils(li.dataset.value)
+        // handleTags();
       }
     });
   })
@@ -126,6 +129,8 @@ export const handleApplianceSelect = () => {
         })
         setLocaleStorage(newData);
         displayCards();
+        createTagsAppliances(li.dataset.value)
+        // handleTags();
       }
     });
   });

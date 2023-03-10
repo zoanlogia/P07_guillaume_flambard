@@ -22,11 +22,11 @@
 .recipes__container {
   display: flex;
   align-items: center;
+  gap: 1em;
   @media screen and (max-width: 768px) {
     justify-content: center;
   }
 
-    
   justify-content: space-between;
   flex-direction: row;
   flex-wrap: wrap;
