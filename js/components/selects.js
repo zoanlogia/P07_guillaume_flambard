@@ -28,7 +28,7 @@ export const generateIngredientsSelect = (ingredients) => {
 
   return `
     <div id="selectIngredient" class="select select_ingredient">
-      <div class="button">Ingrédients <span class="arrow">&#x25BE;</span></div>
+      <div class="button"><input type="search" placeholder="Ingrédients"/><span class="arrow">&#x25BE;</span></div>
       ${selectList.outerHTML}
     </div>
   `;
@@ -38,8 +38,8 @@ export const generateAppliancesList = () => {
   const recipes = getLocaleStorage()
   const appliances = new Set();
   recipes.forEach((appliance) => {
-      appliances.add(appliance.appliance);
-    });
+    appliances.add(appliance.appliance);
+  });
   return Array.from(appliances);
 };
 
@@ -59,7 +59,7 @@ export const generateAppliancesSelect = (appliances) => {
 
   return `
       <div id="selectAppliances" class="select select_appliance">
-        <div class="button">Appareils <span class="arrow">&#x25BE;</span></div>
+        <div class="button"><input type="search" placeholder="Appareil"/><span class="arrow">&#x25BE;</span></div>
         ${selectList.outerHTML}
       </div>
     `;
@@ -94,7 +94,7 @@ export const generateUstensilSelect = (ustensils) => {
 
   return `
       <div id="selectUstensils" class="select select_ustensils">
-        <div class="button">Ustensils <span class="arrow">&#x25BE;</span></div>
+        <div class="button"><input type="search" placeholder="Ustensils"/><span class="arrow">&#x25BE;</span></div>
         ${selectList.outerHTML}
       </div>
     `;

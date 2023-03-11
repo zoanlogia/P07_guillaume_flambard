@@ -111,7 +111,12 @@ table {
   flex-wrap: wrap;
 }
 .select__container #selectIngredient {
+  width: 150px;
   background-color: #3282f7;
+}
+.select__container #selectIngredient .button {
+  display: flex;
+  justify-content: space-between;
 }
 .select__container #selectUstensils {
   background-color: #ed6454;
@@ -126,6 +131,20 @@ table {
   border-radius: 10px;
   color: white;
   cursor: pointer;
+}
+.select__container .select input {
+  background: transparent;
+  border: none;
+}
+.select__container .select :focus {
+  outline: none;
+  background: transparent;
+  color: white;
+  overflow: hidden;
+}
+.select__container .select ::placeholder {
+  color: white;
+  font-size: 16px;
 }
 .select__container .select .arrow {
   display: inline-block;

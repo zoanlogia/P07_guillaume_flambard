@@ -32,6 +32,28 @@ export const handleIngredientSelect = () => {
     arrow.classList.toggle("active");
   });
 
+  document.addEventListener("click", (event) => {
+    const isClickInsideList = list.contains(event.target);
+    const isClickInsideButton = button.contains(event.target);
+
+    // Si le clic est en dehors de la liste déroulante et du bouton, ferme la liste déroulante
+    if (!isClickInsideList && !isClickInsideButton) {
+      list.classList.add("hidden");
+      arrow.classList.remove("active");
+    }
+  });
+
+  button.querySelector("input").addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    lis.forEach((li) => {
+      if (li.dataset.value.toLowerCase().includes(value)) {
+        li.style.display = "block";
+      } else {
+        li.style.display = "none";
+      }
+    })
+  })
+
   lis.forEach((li) => {
     li.addEventListener("click", () => {
       if(document.querySelector(".error")) {
@@ -53,10 +75,9 @@ export const handleIngredientSelect = () => {
 
         setLocaleStorage(newData);
       }
-      // collapseIngredientSelect()
+
       displayCards();
       createTagsIngredients(li.dataset.value)
-      // handleTags();
     });
   });
 };
@@ -75,27 +96,47 @@ export const handleUstensilsSelect = () => {
     arrow.classList.toggle("active");
   });
 
+  button.querySelector("input").addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    lis.forEach((li) => {
+      if (li.dataset.value.toLowerCase().includes(value)) {
+        li.style.display = "block";
+      } else {
+        li.style.display = "none";
+      }
+    })
+  })
+
+  document.addEventListener("click", (event) => {
+    const isClickInsideList = list.contains(event.target);
+    const isClickInsideButton = button.contains(event.target);
+
+    // Si le clic est en dehors de la liste déroulante et du bouton, ferme la liste déroulante
+    if (!isClickInsideList && !isClickInsideButton) {
+      list.classList.add("hidden");
+      arrow.classList.remove("active");
+    }
+  });
+
   lis.forEach((li) => {
     li.addEventListener("click", () => {
 
       const data = getLocaleStorage();
       const ustensils = [...new Set(data.map((ustensil) => ustensil.ustensils.flatMap(ust => ust.toLowerCase())))].flat();
-      if (ustensils.includes(li.dataset.value)) {
+      if (ustensils.includes(li.dataset.value.toLowerCase())) {
         li.style.display = "none";      
-        createTagsUstensils(li.dataset.value)
         
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
             const allUstensils = recipe.ustensils.map((ustensil) => ustensil.toLowerCase())
-            recipe.isShow = allUstensils.includes(li.dataset.value)
+            recipe.isShow = allUstensils.includes(li.dataset.value.toLowerCase())
           }
           return recipe
         })
         setLocaleStorage(newData);
-        displayCards();
-        createTagsUstensils(li.dataset.value)
-        // handleTags();
       }
+      displayCards();
+      createTagsUstensils(li.dataset.value)
     });
   })
 };
@@ -114,6 +155,28 @@ export const handleApplianceSelect = () => {
     arrow.classList.toggle("active");
   });
 
+  button.querySelector("input").addEventListener("input", (e) => {
+    const value = e.target.value.toLowerCase();
+    lis.forEach((li) => {
+      if (li.dataset.value.toLowerCase().includes(value)) {
+        li.style.display = "block";
+      } else {
+        li.style.display = "none";
+      }
+    })
+  })
+
+  document.addEventListener("click", (event) => {
+    const isClickInsideList = list.contains(event.target);
+    const isClickInsideButton = button.contains(event.target);
+
+    // Si le clic est en dehors de la liste déroulante et du bouton, ferme la liste déroulante
+    if (!isClickInsideList && !isClickInsideButton) {
+      list.classList.add("hidden");
+      arrow.classList.remove("active");
+    }
+  });
+
   lis.forEach((li) => {
     li.addEventListener("click", () => {
       const data = getLocaleStorage();
@@ -121,7 +184,6 @@ export const handleApplianceSelect = () => {
 
       if (appliances.includes(li.dataset.value.toLowerCase())) {
         li.style.display = "none";
-        createTagsAppliances(li.dataset.value)
 
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
@@ -131,10 +193,9 @@ export const handleApplianceSelect = () => {
           return recipe
         })
         setLocaleStorage(newData);
-        displayCards();
-        createTagsAppliances(li.dataset.value)
-        // handleTags();
       }
+      displayCards();
+      createTagsAppliances(li.dataset.value)
     });
   });
 };

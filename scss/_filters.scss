@@ -4,7 +4,13 @@
   flex-wrap: wrap;
 
   #selectIngredient {
+    width: 150px;
     background-color: #3282f7;
+
+    .button {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   #selectUstensils {
@@ -25,6 +31,23 @@
     border-radius: 10px;
     color: white;
     cursor: pointer;
+
+    input {
+      background: transparent;
+      border: none;
+    }
+
+    :focus {
+      outline: none;
+      background: transparent;
+      color: white;
+      overflow: hidden;
+    }
+
+    ::placeholder {
+      color: white;
+      font-size: 16px;
+    }
 
     & .arrow {
       display: inline-block;
