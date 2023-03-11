@@ -40,7 +40,7 @@ export const displaySelects = () => {
   const ustensilsSelect = generateUstensilSelect(generateUstensilList())
   let divIngredients = `<div class="ingredients">${ingredientSelect}</div>`
   let divAppliances = `<div class="appliances">${appliancesSelect}</div>`
-  let divUstensils = `<div class="appliances">${ustensilsSelect}</div>`
+  let divUstensils = `<div class="ustensiles">${ustensilsSelect}</div>`
   dom.innerHTML = divIngredients + divAppliances + divUstensils;
   return dom
 };
