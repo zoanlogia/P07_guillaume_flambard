@@ -1,5 +1,5 @@
 import { createTagsAppliances, createTagsIngredients, createTagsUstensils } from "../components/tag.js";
-import { handleIngredientsTag } from "./handleTags.js";
+// import { handleIngredientsTag } from "./handleTags.js";
 // import { handleTags } from "./handleTags.js";
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
 import { displayCards } from "./ui.js";
@@ -39,21 +39,24 @@ export const handleIngredientSelect = () => {
       }
       const data = getLocaleStorage();
       const ingredients = [...new Set(data.map((ingredient) => ingredient.ingredients.flatMap((ing) => ing.ingredient.toLowerCase())))].flat();
-      if (ingredients.includes(li.dataset.value)) {
+
+      if (ingredients.includes(li.dataset.value.toLowerCase())) {
         li.style.display = "none";
+
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
             const allIng = recipe.ingredients.map((ing) => ing.ingredient.toLowerCase())
-            recipe.isShow = allIng.includes(li.dataset.value)
+            recipe.isShow = allIng.includes(li.dataset.value.toLowerCase())
           }
           return recipe
         });
+
         setLocaleStorage(newData);
-        displayCards();
-        createTagsIngredients(li.dataset.value)
-        // handleTags();
-        handleIngredientsTag();
       }
+      // collapseIngredientSelect()
+      displayCards();
+      createTagsIngredients(li.dataset.value)
+      // handleTags();
     });
   });
 };

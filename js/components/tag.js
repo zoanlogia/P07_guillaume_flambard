@@ -1,3 +1,5 @@
+import { handleIngredientsTag } from "../utils/handleTags.js";
+
 export const createTag = (value) => {
     const tag = document.createElement("div");
     tag.classList.add("tag");
@@ -13,6 +15,9 @@ export const createTagsIngredients = (value) => {
     const tag = createTag(value);
     tag.classList.add("blue");
     tags.appendChild(tag);
+
+    handleIngredientsTag(tag);
+
   };
   
   export const createTagsUstensils = (value) => {
@@ -20,6 +25,8 @@ export const createTagsIngredients = (value) => {
     const tag = createTag(value);
     tag.classList.add("orange");
     tags.appendChild(tag);
+
+    
   };
   
   export const createTagsAppliances = (value) => {
