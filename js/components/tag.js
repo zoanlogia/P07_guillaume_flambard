@@ -39,3 +39,17 @@ export const createTagsIngredients = (value) => {
     // handleApplianceTag(tag);
     handleTags(tag);
   };
+
+  export const createTags = (value, type) => {
+    switch (type) {
+      case "ingredients":
+        createTagsIngredients(value);
+        break;
+      case "ustensils":
+        createTagsUstensils(value);
+        break;
+      case "appliances":
+        createTagsAppliances(value);
+        break;
+    }
+  }

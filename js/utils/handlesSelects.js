@@ -1,26 +1,67 @@
 import { createTagsAppliances, createTagsIngredients, createTagsUstensils } from "../components/tag.js";
-// import { handleIngredientsTag } from "./handleTags.js";
-// import { handleTags } from "./handleTags.js";
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
 import { displayCards } from "./ui.js";
 
+// CREATE SELECT LI
+export const drawLi = (value) => {
+  const li = document.createElement("li");
+  li.classList.add("select__item");
+  li.dataset.value = value;
+  li.textContent = value;
 
-// This module exports three functions: handleIngredientSelect(), handleUstensilsSelect(), and handleApplianceSelect(). These functions handle the click event on the corresponding select button and the click event on the list items.
+  li.onclick = (e) => {
+    const type = e.target.parentElement.parentNode.classList[1].split('_')[1];
+    switch (type) {
+      case 'ingredient':
+        createTagsIngredients(e.target.dataset.value);
 
-// handleIngredientSelect() handles the click event on the ingredient select button and the click event on the ingredient list items. When a user clicks on an item, it checks if the ingredient is present in any of the recipes. If it is present, it creates a tag for the ingredient and filters the recipes to show only those that have the selected ingredient. The filtered recipes are then displayed.
+        break;
+      case 'ustensils':
+        createTagsUstensils(e.target.dataset.value);
+        break
+      default:
+        createTagsAppliances(e.target.dataset.value)
+        break;
+    }
 
-// handleUstensilsSelect() handles the click event on the ustensil select button and the click event on the ustensil list items. When a user clicks on an item, it checks if the ustensil is present in any of the recipes. If it is present, it creates a tag for the ustensil and filters the recipes to show only those that have the selected ustensil. The filtered recipes are then displayed.
+  }
 
-// handleApplianceSelect() handles the click event on the appliance select button and the click event on the appliance list items. When a user clicks on an item, it checks if the appliance is present in any of the recipes. If it is present, it creates a tag for the appliance and filters the recipes to show only those that have the selected appliance. The filtered recipes are then displayed.
+  return li;
+}
 
-// All three functions call the getLocaleStorage() function from the storage.js module to get the recipes data, and setLocaleStorage() to update the filtered data in the local storage. They also call the displayCards() function from the ui.js module to display the filtered recipes.
+// UPDATE SELECTS
+const updateUstensilSelect = (data) => {
+  const list = document.querySelector(".select_ustensils .select__list");
+  list.innerHTML = '';
 
-// The createTagsIngredients(), createTagsUstensils(), and createTagsAppliances() functions are imported from the handleTags.js module to create tags for the selected items.
+  const ustensils = [...new Set(data.filter(recipe => recipe.isShow).flatMap(recipe => recipe.ustensils.flatMap(ust => ust.toLowerCase())))];
 
-/**
- * It handles the click event on the ingredient select button and the click event on the ingredient
- * list items
- */
+  ustensils.forEach(ust => {
+    list.append(drawLi(ust))
+  })
+}
+
+const updateApplianceSelect = (data) => {
+  const list = document.querySelector(".select_appliance .select__list");
+  list.innerHTML = '';
+
+  const appliances = [...new Set(data.filter(recipe => recipe.isShow).map(recipe => recipe.appliance.toLowerCase()))];
+  appliances.forEach(app => {
+    list.append(drawLi(app))
+  })
+}
+
+const updateIngredientSelect = (data) => {
+  const list = document.querySelector(".select_ingredient .select__list");
+  list.innerHTML = '';
+
+  const ingredients = [...new Set(data.filter(recipe => recipe.isShow).flatMap(recipe => recipe.ingredients.flatMap(ing => ing.ingredient.toLowerCase())))];
+  ingredients.forEach(ing => {
+    list.append(drawLi(ing))
+  })
+}
+
+
 export const handleIngredientSelect = () => {
   const button = document.querySelector(".select_ingredient .button");
   const arrow = button.querySelector("span");
@@ -49,22 +90,21 @@ export const handleIngredientSelect = () => {
       if (li.dataset.value.toLowerCase().includes(value)) {
         li.style.display = "block";
       } else {
-        li.style.display = "none";
+        li.remove()
       }
     })
   })
 
   lis.forEach((li) => {
     li.addEventListener("click", () => {
-      if(document.querySelector(".error")) {
+      if (document.querySelector(".error")) {
         document.querySelector(".error").remove();
       }
       const data = getLocaleStorage();
       const ingredients = [...new Set(data.map((ingredient) => ingredient.ingredients.flatMap((ing) => ing.ingredient.toLowerCase())))].flat();
 
       if (ingredients.includes(li.dataset.value.toLowerCase())) {
-        li.style.display = "none";
-
+        li.remove()
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
             const allIng = recipe.ingredients.map((ing) => ing.ingredient.toLowerCase())
@@ -74,13 +114,18 @@ export const handleIngredientSelect = () => {
         });
 
         setLocaleStorage(newData);
+        displayCards();
+        createTagsIngredients(li.dataset.value)
+        // mettre a jours les 2 autres selects
+        updateUstensilSelect(newData)
+        updateApplianceSelect(newData)
       }
-
-      displayCards();
-      createTagsIngredients(li.dataset.value)
     });
   });
 };
+
+
+
 
 /**
  * It handles the click event on the appliance select button and the click event on the appliance
@@ -102,7 +147,7 @@ export const handleUstensilsSelect = () => {
       if (li.dataset.value.toLowerCase().includes(value)) {
         li.style.display = "block";
       } else {
-        li.style.display = "none";
+        li.remove()
       }
     })
   })
@@ -124,8 +169,8 @@ export const handleUstensilsSelect = () => {
       const data = getLocaleStorage();
       const ustensils = [...new Set(data.map((ustensil) => ustensil.ustensils.flatMap(ust => ust.toLowerCase())))].flat();
       if (ustensils.includes(li.dataset.value.toLowerCase())) {
-        li.style.display = "none";      
-        
+        li.remove()
+
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
             const allUstensils = recipe.ustensils.map((ustensil) => ustensil.toLowerCase())
@@ -134,9 +179,12 @@ export const handleUstensilsSelect = () => {
           return recipe
         })
         setLocaleStorage(newData);
+        displayCards();
+        createTagsUstensils(li.dataset.value)
+        // mettre a jours les 2 autres selects
+        updateIngredientSelect(newData)
+        updateApplianceSelect(newData)
       }
-      displayCards();
-      createTagsUstensils(li.dataset.value)
     });
   })
 };
@@ -161,7 +209,7 @@ export const handleApplianceSelect = () => {
       if (li.dataset.value.toLowerCase().includes(value)) {
         li.style.display = "block";
       } else {
-        li.style.display = "none";
+        li.remove()
       }
     })
   })
@@ -183,19 +231,22 @@ export const handleApplianceSelect = () => {
       const appliances = [...new Set(data.map((appliance) => appliance.appliance.toLowerCase()))]
 
       if (appliances.includes(li.dataset.value.toLowerCase())) {
-        li.style.display = "none";
+        li.remove()
 
         const newData = data.map((recipe) => {
           if (recipe.isShow) {
-           const allAppliances = recipe.appliance.toLowerCase()
+            const allAppliances = recipe.appliance.toLowerCase()
             recipe.isShow = allAppliances.includes(li.dataset.value.toLowerCase())
           }
           return recipe
         })
         setLocaleStorage(newData);
+        displayCards();
+        createTagsAppliances(li.dataset.value)
+        // mettre a jours les 2 autres selects
+        updateUstensilSelect(newData)
+        updateIngredientSelect(newData)
       }
-      displayCards();
-      createTagsAppliances(li.dataset.value)
     });
   });
 };

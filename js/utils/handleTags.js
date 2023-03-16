@@ -1,3 +1,4 @@
+// import { updateLists } from "./handlesSelects.js";
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
 import { displayCards } from "./ui.js";
 
@@ -7,15 +8,15 @@ import { displayCards } from "./ui.js";
 //     const DATA = getLocaleStorage();
 
 //     tag.remove();
-//     const survivorTags = Array.from(document.querySelectorAll('.tag.blue'));
-//     const survivorTagsValue = survivorTags.map(t => {
+//     const tagsLeft = Array.from(document.querySelectorAll('.tag.blue'));
+//     const tagsLeftValue = tagsLeft.map(t => {
 //       const p = t.querySelector('p');
 //       return p.dataset.value.toLowerCase();
 //     })
 
 //     const newData = DATA.map((recipe) => {
 //         const recipIng = recipe.ingredients.map((ing) => ing.ingredient.toLowerCase());
-//         recipe.isShow = survivorTagsValue.every(el => recipIng.includes(el));
+//         recipe.isShow = tagsLeftValue.every(el => recipIng.includes(el));
 //         return recipe;
 //       });
 //       setLocaleStorage(newData);
@@ -29,18 +30,18 @@ import { displayCards } from "./ui.js";
 //     const DATA = getLocaleStorage();
 
 //     tag.remove();
-//     const survivorTags = Array.from(document.querySelectorAll('.tag.orange'));
+//     const tagsLeft = Array.from(document.querySelectorAll('.tag.orange'));
 
-//     const survivorTagsValue = survivorTags.map(t => {
+//     const tagsLeftValue = tagsLeft.map(t => {
 //       const p = t.querySelector('p');
 //       return p.dataset.value.toLowerCase();
 //     })
 
-//     console.log(survivorTagsValue);
+//     console.log(tagsLeftValue);
 
 //     const newData = DATA.map((recipe) => {
 //         const recipUst = recipe.ustensils.map((ust) => ust.toLowerCase());
-//         recipe.isShow = survivorTagsValue.every(el => recipUst.includes(el));
+//         recipe.isShow = tagsLeftValue.every(el => recipUst.includes(el));
 //         return recipe;
 //       });
 //       setLocaleStorage(newData);
@@ -54,16 +55,16 @@ import { displayCards } from "./ui.js";
 //     const DATA = getLocaleStorage();
 
 //     tag.remove();
-//     const survivorTags = Array.from(document.querySelectorAll('.tag.green'));
+//     const tagsLeft = Array.from(document.querySelectorAll('.tag.green'));
 
-//     const survivorTagsValue = survivorTags.map(t => {
+//     const tagsLeftValue = tagsLeft.map(t => {
 //       const p = t.querySelector('p');
 //       return p.dataset.value.toLowerCase();
 //     })
 
 //     const newData = DATA.map((recipe) => {
 //         const recipApp = recipe.appliance.toLowerCase();
-//         recipe.isShow = survivorTagsValue.every(el => recipApp.includes(el));
+//         recipe.isShow = tagsLeftValue.every(el => recipApp.includes(el));
 //         return recipe;
 //       });
 //       setLocaleStorage(newData);
@@ -73,25 +74,27 @@ import { displayCards } from "./ui.js";
 
 export const handleTags = (tag) => {
   const close = tag.querySelector('.tag__close')
+
   close.addEventListener('click', () => {
     const DATA = getLocaleStorage();
 
     tag.remove();
-    const survivorTags = Array.from(document.querySelectorAll('.tag'));
+    const tagsLeft = Array.from(document.querySelectorAll('.tag'));
 
-    const survivorTagsValue = survivorTags.map(t => {
+    const tagsLeftValue = tagsLeft.map(t => {
       const p = t.querySelector('p');
       return p.dataset.value.toLowerCase();
     })
 
     const newData = DATA.map((recipe) => {
-        const recipIng = recipe.ingredients.map((ing) => ing.ingredient.toLowerCase());
-        const recipUst = recipe.ustensils.map((ust) => ust.toLowerCase());
-        const recipApp = recipe.appliance.toLowerCase();
-        recipe.isShow = survivorTagsValue.every(el => recipIng.includes(el) || recipUst.includes(el) || recipApp.includes(el));
-        return recipe;
-      });
-      setLocaleStorage(newData);
-      displayCards();
+      const recipIng = recipe.ingredients.map((ing) => ing.ingredient.toLowerCase());
+      const recipUst = recipe.ustensils.map((ust) => ust.toLowerCase());
+      const recipApp = recipe.appliance.toLowerCase();
+      recipe.isShow = tagsLeftValue.every(el => recipIng.includes(el) || recipUst.includes(el) || recipApp.includes(el));
+      return recipe;
+    });
+    setLocaleStorage(newData);
+    displayCards();
+    // updateLists(); // met à jour la liste des éléments disponibles
   })
 }

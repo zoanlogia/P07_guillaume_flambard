@@ -27,7 +27,6 @@ export const displayCards = () => {
   }
 };
 
-
 /**
  * It takes the ingredients, appliances and ustensils lists and generates a select element for each of
  * them
