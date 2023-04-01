@@ -113,6 +113,7 @@ table {
 .select__container #selectIngredient {
   width: 150px;
   background-color: #3282f7;
+  height: max-content;
 }
 .select__container #selectIngredient .button {
   display: flex;
@@ -120,9 +121,11 @@ table {
 }
 .select__container #selectUstensils {
   background-color: #ed6454;
+  height: max-content;
 }
 .select__container #selectAppliances {
   background-color: #68d9a4;
+  height: max-content;
 }
 .select__container .select {
   width: auto;
@@ -155,6 +158,7 @@ table {
   transform: rotate(180deg);
 }
 .select__container .select__list {
+  text-transform: capitalize;
   cursor: pointer;
   max-height: 20rem;
   height: auto;

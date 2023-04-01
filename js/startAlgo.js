@@ -1,12 +1,11 @@
 import { globaleSearch } from "./utils/globaleSearch.js";
-import { handleApplianceSelect, handleIngredientSelect, handleUstensilsSelect } from "./utils/handlesSelects.js";
-
-
+import { handleApplianceSelect, handleIngredientSelect, handleUstensilsSelect } from "./utils/handlesSelectsLists.js";
 const startAlgo = () => {
-  globaleSearch()
   handleIngredientSelect();
+  handleApplianceSelect();
   handleUstensilsSelect();
-  handleApplianceSelect()
+  globaleSearch();
 };
+
 
 export default startAlgo;

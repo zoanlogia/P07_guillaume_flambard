@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,15 +24,28 @@
         <div class="container">
           <form id="search" class="search" action="#" method="post">
             <div class="search__container">
-              <input
-                type="search"
-                name="search"
-                id="searchbar"
-                placeholder="Rechercher une recette"
-              />
+              <input type="search" name="search" id="searchbar" placeholder="Rechercher une recette" />
             </div>
             <div class="tags__container"></div>
-            <div class="select__container"></div>
+            <div class="select__container">
+              <div id="selectIngredient" class="select select_ingredients select_list">
+                <div class="button">
+                  <input type="search" placeholder="Ingrédients" />
+                  <span class="arrow">&#x25BE;</span>
+                </div>
+                <ul class="ul_ingredients hidden"></ul>
+              </div>
+              <div id="selectUstensils" class="select select_ustensils select_list">
+                <div class="button"><input type="search" placeholder="Ustensils" /><span class="arrow">&#x25BE;</span>
+                </div>
+                <ul class="ul_ustensils hidden"></ul>
+              </div>
+              <div id="selectAppliances" class="select select_appliance select_list">
+                <div class="button"><input type="search" placeholder="Appareil" /><span class="arrow">&#x25BE;</span>
+                </div>
+                <ul class="ul_appliances hidden"></ul>
+              </div>
+            </div>
             <div class="recipes__container"></div>
           </form>
         </div>
@@ -40,4 +54,5 @@
     </div>
     <script src="js/index.js" type="module"></script>
   </body>
+
 </html>
