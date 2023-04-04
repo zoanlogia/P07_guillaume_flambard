@@ -20,7 +20,6 @@ export const createTagsIngredients = (value) => {
 
 export const createTagsUstensils = (value) => {
   const tag = createTag(value);
-  console.log(value);
   tag.classList.add("orange");
   tagsContainer.appendChild(tag);
   handleTags(tag);

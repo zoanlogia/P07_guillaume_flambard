@@ -5,7 +5,6 @@ import { displayCards } from "./ui.js";
 import { updateApplianceSelect, updateIngredientSelect, updateUstensilSelect } from "./updateSelect.js";
 
 
-
 export const handleIngredientSelect = () => {
   const button = document.getElementById("selectIngredient");
   const arrow = button.querySelector(".arrow");
