@@ -178,10 +178,10 @@ table {
   background-color: #f44336;
   border-radius: 5px;
   position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 100;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }

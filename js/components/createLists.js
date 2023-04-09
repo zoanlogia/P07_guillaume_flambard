@@ -17,7 +17,7 @@ export const drawLi = (value) => {
 
         if (type === 'ingredients') {
             createTagsIngredients(e.target.dataset.value);
-            // logique pour le onClick
+            // logique pour l'onClick
             if (document.querySelector(".error")) {
                 document.querySelector(".error").remove();
             }
@@ -35,7 +35,7 @@ export const drawLi = (value) => {
                 });
                 setLocaleStorage(newData);
                 displayCards();
-                // mettre a jours les 2 autres selects
+                // mettre à jour les 2 autres selects
                 updateIngredientSelect(newData)
                 updateUstensilSelect(newData)
                 updateApplianceSelect(newData)
@@ -43,7 +43,6 @@ export const drawLi = (value) => {
         }
         else if (type === 'ustensils') {
             createTagsUstensils(e.target.dataset.value);
-            // logique pour le onClick
             if (document.querySelector(".error")) {
                 document.querySelector(".error").remove();
             }
