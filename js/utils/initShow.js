@@ -6,8 +6,9 @@ import recipes from "../../data/recipes.js";
  * true
  */
 export const initRecipes = () => {
-  recipes.forEach(recipe => {
-    recipe.isShow = true;
-  });
-  setLocaleStorage(recipes);
+  const updatedRecipes = recipes.map((recipe) => ({
+    ...recipe,
+    isShow: true,
+  }));
+  setLocaleStorage(updatedRecipes);
 };

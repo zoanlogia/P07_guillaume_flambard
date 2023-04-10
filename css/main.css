@@ -111,27 +111,85 @@ table {
   flex-wrap: wrap;
 }
 .select__container #selectIngredient {
-  width: 150px;
+  width: auto;
   background-color: #3282f7;
+  max-height: 250px;
   height: max-content;
+  overflow-y: scroll;
 }
-.select__container #selectIngredient .button {
+.select__container #selectIngredient ul {
+  display: grid;
+  grid-template-columns: repeat(3, 0.7fr);
+}
+.select__container #selectIngredient .hidden {
+  display: none;
+  height: 20px;
+}
+.select__container #selectIngredient::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.select__container #selectIngredient::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.select__container #selectIngredient::-webkit-scrollbar-track {
+  background: transparent;
+}
+.select__container .button {
   display: flex;
   justify-content: space-between;
 }
 .select__container #selectUstensils {
   background-color: #ed6454;
+  width: auto;
+  max-height: 250px;
   height: max-content;
+  overflow-y: scroll;
+}
+.select__container #selectUstensils ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 1rem;
+}
+.select__container #selectUstensils .hidden {
+  display: none;
+  height: 20px;
+}
+.select__container #selectUstensils::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.select__container #selectUstensils::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.select__container #selectUstensils::-webkit-scrollbar-track {
+  background: transparent;
 }
 .select__container #selectAppliances {
   background-color: #68d9a4;
+  width: 165px;
+  max-height: 250px;
   height: max-content;
+  overflow-y: scroll;
+}
+.select__container #selectAppliances::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.select__container #selectAppliances::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.select__container #selectAppliances::-webkit-scrollbar-track {
+  background: transparent;
 }
 .select__container .select {
   width: auto;
   margin: 1em 1em 0 0;
   padding: 1em;
-  border-radius: 10px;
+  border-radius: 5px;
   color: white;
   cursor: pointer;
 }

@@ -4,34 +4,106 @@
   flex-wrap: wrap;
 
   #selectIngredient {
-    width: 150px;
+    width: auto;
     background-color: #3282f7;
+    max-height: 250px;
     height: max-content;
+    overflow-y: scroll;
 
-    .button {
-      display: flex;
-      justify-content: space-between;
+    ul {
+      display: grid;
+      grid-template-columns: repeat(3, .7fr)
+    }
+
+    .hidden {
+      display: none;
+      height: 20px;
     }
   }
 
+  #selectIngredient::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  #selectIngredient::-webkit-scrollbar-thumb {
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  #selectIngredient::-webkit-scrollbar-track {
+    background: transparent
+  }
+
+  .button {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+
   #selectUstensils {
     background-color: #ed6454;
+    width: auto;
+    max-height: 250px;
     height: max-content;
+    overflow-y: scroll;
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0 1rem;
+    }
+
+    .hidden {
+      display: none;
+      height: 20px;
+    }
+  }
+
+  #selectUstensils::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  #selectUstensils::-webkit-scrollbar-thumb {
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  #selectUstensils::-webkit-scrollbar-track {
+    background: transparent
   }
 
   #selectAppliances {
     background-color:
       #68d9a4;
+    width: 165px;
+    max-height: 250px;
     height: max-content;
+    overflow-y: scroll;
+  }
+
+  #selectAppliances::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  #selectAppliances::-webkit-scrollbar-thumb {
+    border-radius: 25px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  #selectAppliances::-webkit-scrollbar-track {
+    background: transparent
   }
 
   .select {
     width: auto;
     margin: 1em 1em 0 0;
-    //  condition pour gérer la couleur
 
     padding: 1em;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
 
