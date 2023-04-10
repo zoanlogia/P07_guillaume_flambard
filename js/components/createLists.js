@@ -15,10 +15,28 @@ export const drawLi = (value) => {
   const li = document.createElement("li");
 
   li.classList.add("select__item");
-  li.dataset.value = value;
-  li.textContent = value;
+  li.dataset.value = value.toLowerCase();
+  li.textContent = value.toLowerCase();
 
   li.onclick = (e) => {
+    // const inputsSearch = document.querySelectorAll(
+    //   ".select input[type='search']"
+    // );
+    // inputsSearch.forEach((input) => {
+    //   input.addEventListener("input", (e) => {
+    //     const value = e.target.value.toLowerCase();
+
+    //     if (li.dataset.value.includes(value)) {
+    //       li.style.display = "block";
+    //     } else {
+    //       li.style.display = "none";
+    //     }
+    //   });
+    // });
+
+    const searchbar = document.querySelector("#searchbar");
+    searchbar.value = "";
+
     const type = e.target.parentElement.parentNode.classList[1].split("_")[1];
     const clickedIng = li.dataset.value.toLowerCase();
 
@@ -46,23 +64,6 @@ export const drawLi = (value) => {
             recipe.isShow = allIng.includes(li.dataset.value);
           }
           return recipe;
-        });
-
-        const input = document.querySelector(
-          "#selectIngredient input[type=search]"
-        );
-        input.addEventListener("input", (e) => {
-          const value = e.target.value.toLowerCase();
-          const lis = Array.from(
-            document.querySelectorAll(".ul_ingredients > li")
-          );
-          lis.map((li) => {
-            if (li.dataset.value.toLowerCase().includes(value.toLowerCase())) {
-              li.style.display = "block";
-            } else {
-              li.style.display = "none";
-            }
-          });
         });
 
         setLocaleStorage(newData);
@@ -99,23 +100,6 @@ export const drawLi = (value) => {
           return recipe;
         });
 
-        const input = document.querySelector(
-          "#selectUstensils input[type=search]"
-        );
-        input.addEventListener("input", (e) => {
-          const value = e.target.value.toLowerCase();
-          const lis = Array.from(
-            document.querySelectorAll(".ul_ustensils > li")
-          );
-          lis.map((li) => {
-            if (li.dataset.value.toLowerCase().includes(value.toLowerCase())) {
-              li.style.display = "block";
-            } else {
-              li.style.display = "none";
-            }
-          });
-        });
-
         setLocaleStorage(newData);
         displayCards();
         // mettre a jours les 2 autres selects
@@ -144,23 +128,6 @@ export const drawLi = (value) => {
             );
           }
           return recipe;
-        });
-
-        const input = document.querySelector(
-          "#selectAppliances input[type=search]"
-        );
-        input.addEventListener("input", (e) => {
-          const value = e.target.value.toLowerCase();
-          const lis = Array.from(
-            document.querySelectorAll(".ul_appliances > li")
-          );
-          lis.map((li) => {
-            if (li.dataset.value.toLowerCase().includes(value.toLowerCase())) {
-              li.style.display = "block";
-            } else {
-              li.style.display = "none";
-            }
-          });
         });
 
         setLocaleStorage(newData);

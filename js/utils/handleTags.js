@@ -14,6 +14,7 @@ export const handleTags = (tag) => {
     const DATA = getLocaleStorage();
 
     tag.remove();
+
     const tagsLeft = Array.from(document.querySelectorAll(".tag"));
 
     const tagsLeftValue = tagsLeft.map((t) => {
@@ -27,14 +28,20 @@ export const handleTags = (tag) => {
       );
       const recipUst = recipe.ustensils.map((ust) => ust.toLowerCase());
       const recipApp = recipe.appliance.toLowerCase();
-      recipe.isShow = tagsLeftValue.every(
-        (el) =>
-          recipIng.includes(el) ||
-          recipUst.includes(el) ||
-          recipApp.includes(el)
-      );
+
+      if (tagsLeftValue.length === 0) {
+        recipe.isShow = true;
+      } else {
+        recipe.isShow = tagsLeftValue.every(
+          (el) =>
+            recipIng.includes(el) ||
+            recipUst.includes(el) ||
+            recipApp.includes(el)
+        );
+      }
       return recipe;
     });
+
     setLocaleStorage(newData);
     displayCards();
     updateApplianceSelect(newData);

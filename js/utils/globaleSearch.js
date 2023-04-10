@@ -3,46 +3,45 @@ import { displayCards } from "./ui.js";
 
 export const globaleSearch = () => {
   const searchbar = document.querySelector("#searchbar");
-  const lists = Array.from(document.querySelectorAll("li"));
   const containerTags = document.querySelector(".tags__container");
-  const DATA = getLocaleStorage();
+
   searchbar.addEventListener("input", (e) => {
+    const lists = Array.from(document.querySelectorAll(".select__item"));
+    const DATA = getLocaleStorage();
+
     if (e.target.value.length >= 3) {
-      const RecipesToDisplay = DATA.filter((recipe) => {
-        if (recipe.isShow) {
-          return (
-            recipe.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-            recipe.ingredients.some((ingredient) =>
-              ingredient.ingredient
-                .toLowerCase()
-                .includes(e.target.value.toLowerCase())
-            ) ||
-            recipe.ustensils.some((ustensil) =>
-              ustensil.toLowerCase().includes(e.target.value.toLowerCase())
-            ) ||
-            recipe.appliance
-              .toLowerCase()
-              .includes(e.target.value.toLowerCase()) ||
-            recipe.description
-              .toLowerCase()
-              .includes(e.target.value.toLowerCase())
-          );
-        }
-      });
-      lists.filter((li) => {
-        return li.textContent
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase())
-          ? (li.style.display = "block")
-          : (li.style.display = "none");
+      const RecipesToDisplay = DATA.map((recipe) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const matchesSearchTerm =
+          recipe.name.toLowerCase().includes(searchTerm) ||
+          recipe.ingredients.some((ingredient) =>
+            ingredient.ingredient.toLowerCase().includes(searchTerm)
+          ) ||
+          recipe.ustensils.some((ustensil) =>
+            ustensil.toLowerCase().includes(searchTerm)
+          ) ||
+          recipe.appliance.toLowerCase().includes(searchTerm) ||
+          recipe.description.toLowerCase().includes(searchTerm);
+
+        return {
+          ...recipe,
+          isShow: matchesSearchTerm,
+        };
       });
       setLocaleStorage(RecipesToDisplay);
-      displayCards();
     } else {
+      const RecipesToDisplay = DATA.map((recipe) => ({
+        ...recipe,
+        isShow: true,
+      }));
       containerTags.innerHTML = "";
-      lists.map((li) => (li.style.display = "block"));
-      setLocaleStorage(DATA);
-      displayCards();
+      setLocaleStorage(RecipesToDisplay);
     }
+    lists.filter((li) => {
+      return li.textContent.toLowerCase().includes(e.target.value.toLowerCase())
+        ? (li.style.display = "block")
+        : (li.style.display = "none");
+    });
+    displayCards();
   });
 };
