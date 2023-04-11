@@ -1,4 +1,5 @@
 import { drawLi } from "../components/createLists.js";
+import { updateListOnInput } from "./selectInput.js";
 // import { handleInputSelects } from "./handleSelectsInputs.js";
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
 import { displayCards } from "./ui.js";
@@ -46,16 +47,7 @@ export const handleIngredientSelect = () => {
     }
   });
 
-  button.querySelector("input").addEventListener("input", (e) => {
-    const value = e.target.value.toLowerCase();
-    Array.from(lis).map((li) => {
-      if (li.dataset.value.toLowerCase().includes(value.toLowerCase())) {
-        li.style.display = "block";
-      } else {
-        li.style.display = "none";
-      }
-    });
-  });
+  updateListOnInput();
 
   Array.from(lis).map((li) => {
     li.addEventListener("click", () => {
@@ -134,16 +126,7 @@ export const handleUstensilsSelect = () => {
     }
   });
 
-  button.querySelector("input").addEventListener("input", (e) => {
-    const value = e.target.value.toLowerCase();
-    Array.from(lis).map((li) => {
-      if (li.dataset.value.toLowerCase().includes(value)) {
-        li.style.display = "block";
-      } else {
-        li.style.display = "none";
-      }
-    });
-  });
+  updateListOnInput();
 
   Array.from(lis).map((li) => {
     li.addEventListener("click", () => {
@@ -207,16 +190,7 @@ export const handleApplianceSelect = () => {
     arrow.classList.toggle("active");
   });
 
-  button.querySelector("input").addEventListener("input", (e) => {
-    const value = e.target.value.toLowerCase();
-    Array.from(lis).map((li) => {
-      if (li.dataset.value.toLowerCase().includes(value.toLowerCase())) {
-        li.style.display = "block";
-      } else {
-        li.style.display = "none";
-      }
-    });
-  });
+  updateListOnInput();
 
   document.addEventListener("click", (event) => {
     const isClickInsideList = ul.contains(event.target);

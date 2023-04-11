@@ -1,3 +1,4 @@
+import { updateListOnInput } from "../utils/selectInput.js";
 import { getLocaleStorage, setLocaleStorage } from "../utils/storage.js";
 import { displayCards } from "../utils/ui.js";
 import {
@@ -19,21 +20,6 @@ export const drawLi = (value) => {
   li.textContent = value.toLowerCase();
 
   li.onclick = (e) => {
-    // const inputsSearch = document.querySelectorAll(
-    //   ".select input[type='search']"
-    // );
-    // inputsSearch.forEach((input) => {
-    //   input.addEventListener("input", (e) => {
-    //     const value = e.target.value.toLowerCase();
-
-    //     if (li.dataset.value.includes(value)) {
-    //       li.style.display = "block";
-    //     } else {
-    //       li.style.display = "none";
-    //     }
-    //   });
-    // });
-
     const searchbar = document.querySelector("#searchbar");
     searchbar.value = "";
 
@@ -72,6 +58,7 @@ export const drawLi = (value) => {
         updateIngredientSelect(newData);
         updateUstensilSelect(newData);
         updateApplianceSelect(newData);
+        updateListOnInput();
       }
     } else if (type === "ustensils") {
       createTagsUstensils(e.target.dataset.value);
@@ -106,6 +93,7 @@ export const drawLi = (value) => {
         updateUstensilSelect(newData);
         updateIngredientSelect(newData);
         updateApplianceSelect(newData);
+        updateListOnInput();
       }
     } else {
       createTagsAppliances(e.target.dataset.value);
@@ -136,6 +124,7 @@ export const drawLi = (value) => {
         updateApplianceSelect(newData);
         updateUstensilSelect(newData);
         updateIngredientSelect(newData);
+        updateListOnInput();
       }
     }
   };
