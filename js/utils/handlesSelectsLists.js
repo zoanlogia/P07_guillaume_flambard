@@ -18,19 +18,23 @@ export const handleIngredientSelect = () => {
   const ul = document.querySelector(".ul_ingredients");
 
   const data = getLocaleStorage();
-  const ingredients = [
-    ...new Set(
-      data
-        .filter((recipe) => recipe.isShow)
-        .flatMap((recipe) =>
-          recipe.ingredients.flatMap((ing) => ing.ingredient.toLowerCase())
-        )
-    ),
-  ];
+  const ingredients = [];
+  for (let i = 0; i < data.length; i++) {
+    let recipe = data[i];
+    if (recipe.isShow) {
+      let recipeIngredients = recipe.ingredients;
+      for (let j = 0; j < recipeIngredients.length; j++) {
+        let ingredient = recipeIngredients[j].ingredient.toLowerCase();
+        if (!ingredients.includes(ingredient)) {
+          ingredients.push(ingredient);
+        }
+      }
+    }
+  }
 
-  ingredients.map((ing) => {
-    ul.append(drawLi(ing));
-  });
+  for (let i = 0; i < ingredients.length; i++) {
+    ul.append(drawLi(ingredients[i]));
+  }
 
   const lis = document.querySelectorAll(".ul_ingredients >.select__item");
 
@@ -52,31 +56,39 @@ export const handleIngredientSelect = () => {
 
   updateListOnInput();
 
-  Array.from(lis).map((li) => {
+  for (let i = 0; i < lis.length; i++) {
+    let li = lis[i];
     li.addEventListener("click", () => {
       if (document.querySelector(".error")) {
         document.querySelector(".error").remove();
       }
       const data = getLocaleStorage();
-      const ingredients = [
-        ...new Set(
-          data.flatMap((recipe) =>
-            recipe.ingredients.flatMap((ing) => ing.ingredient.toLowerCase())
-          )
-        ),
-      ];
+      const ingredients = [];
+      for (let i = 0; i < data.length; i++) {
+        let recipe = data[i];
+        let recipeIngredients = recipe.ingredients;
+        for (let j = 0; j < recipeIngredients.length; j++) {
+          let ingredient = recipeIngredients[j].ingredient.toLowerCase();
+          if (!ingredients.includes(ingredient)) {
+            ingredients.push(ingredient);
+          }
+        }
+      }
 
       if (ingredients.includes(li.dataset.value.toLowerCase())) {
         li.style.display = "none";
-        const newData = data.map((recipe) => {
+        const newData = [];
+        for (let i = 0; i < data.length; i++) {
+          let recipe = data[i];
           if (recipe.isShow) {
-            const allIng = recipe.ingredients.map((ing) =>
-              ing.ingredient.toLowerCase()
-            );
+            let allIng = [];
+            for (let j = 0; j < recipe.ingredients.length; j++) {
+              allIng.push(recipe.ingredients[j].ingredient.toLowerCase());
+            }
             recipe.isShow = allIng.includes(li.dataset.value);
           }
-          return recipe;
-        });
+          newData.push(recipe);
+        }
 
         setLocaleStorage(newData);
         displayCards();
@@ -85,7 +97,7 @@ export const handleIngredientSelect = () => {
         updateApplianceSelect(newData);
       }
     });
-  });
+  }
 };
 
 /**
@@ -97,19 +109,23 @@ export const handleUstensilsSelect = () => {
   const ul = document.querySelector(".ul_ustensils");
 
   const data = getLocaleStorage();
-  const ustensils = [
-    ...new Set(
-      data
-        .filter((recipe) => recipe.isShow)
-        .flatMap((recipe) =>
-          recipe.ustensils.flatMap((ust) => ust.toLowerCase())
-        )
-    ),
-  ];
+  const ustensils = [];
+  for (let i = 0; i < data.length; i++) {
+    let recipe = data[i];
+    if (recipe.isShow) {
+      let recipeUstensils = recipe.ustensils;
+      for (let j = 0; j < recipeUstensils.length; j++) {
+        let ustensil = recipeUstensils[j].toLowerCase();
+        if (!ustensils.includes(ustensil)) {
+          ustensils.push(ustensil);
+        }
+      }
+    }
+  }
 
-  ustensils.map((ust) => {
-    ul.append(drawLi(ust));
-  });
+  for (let i = 0; i < ustensils.length; i++) {
+    ul.append(drawLi(ustensils[i]));
+  }
 
   const lis = document.querySelectorAll(".ul_ustensils >.select__item");
 
@@ -131,30 +147,41 @@ export const handleUstensilsSelect = () => {
 
   updateListOnInput();
 
-  Array.from(lis).map((li) => {
+  for (let i = 0; i < lis.length; i++) {
+    let li = lis[i];
     li.addEventListener("click", () => {
       const data = getLocaleStorage();
-      const ustensils = [
-        ...new Set(
-          data.map((ustensil) =>
-            ustensil.ustensils.flatMap((ust) => ust.toLowerCase())
-          )
-        ),
-      ].flat();
+      const ustensils = [];
+      for (let i = 0; i < data.length; i++) {
+        let recipe = data[i];
+        let recipeUstensils = recipe.ustensils;
+        for (let j = 0; j < recipeUstensils.length; j++) {
+          let ustensil = recipeUstensils[j].toLowerCase();
+          if (!ustensils.includes(ustensil)) {
+            ustensils.push(ustensil);
+          }
+        }
+      }
+
       if (ustensils.includes(li.dataset.value.toLowerCase())) {
         li.style.display = "none";
 
-        const newData = data.map((recipe) => {
+        const newData = [];
+        for (let i = 0; i < data.length; i++) {
+          let recipe = data[i];
           if (recipe.isShow) {
-            const allUstensils = recipe.ustensils.map((ustensil) =>
-              ustensil.toLowerCase()
-            );
+            let allUstensils = [];
+            for (let j = 0; j < recipe.ustensils.length; j++) {
+              allUstensils.push(recipe.ustensils[j].toLowerCase());
+            }
             recipe.isShow = allUstensils.includes(
               li.dataset.value.toLowerCase()
             );
           }
-          return recipe;
-        });
+
+          newData.push(recipe);
+        }
+
         setLocaleStorage(newData);
         displayCards();
         // mettre a jours les 2 autres selects
@@ -162,8 +189,9 @@ export const handleUstensilsSelect = () => {
         updateApplianceSelect(newData);
       }
     });
-  });
+  }
 };
+
 /**
  * It handles the click event on the appliance select button and the appliance select list items
  */
@@ -174,17 +202,17 @@ export const handleApplianceSelect = () => {
   const ul = document.querySelector(".ul_appliances");
 
   const data = getLocaleStorage();
-  const appliances = [
-    ...new Set(
-      data
-        .filter((recipe) => recipe.isShow)
-        .map((recipe) => recipe.appliance.toLowerCase())
-    ),
-  ];
+  const appliances = [];
+  for (let i = 0; i < data.length; i++) {
+    let recipe = data[i];
+    if (recipe.isShow) {
+      appliances.push(recipe.appliance.toLowerCase());
+    }
+  }
 
-  appliances.map((appliance) => {
-    ul.append(drawLi(appliance));
-  });
+  for (let i = 0; i < appliances.length; i++) {
+    ul.appendChild(drawLi(appliances[i]));
+  }
 
   const lis = document.querySelectorAll(".ul_appliances >.select__item");
 
@@ -206,25 +234,33 @@ export const handleApplianceSelect = () => {
     }
   });
 
-  Array.from(lis).map((li) => {
-    li.addEventListener("click", () => {
+  for (let i = 0; i < lis.length; i++) {
+    lis[i].addEventListener("click", () => {
       const data = getLocaleStorage();
-      const appliances = [
-        ...new Set(data.map((appliance) => appliance.appliance.toLowerCase())),
-      ];
+      const appliances = [];
 
-      if (appliances.includes(li.dataset.value.toLowerCase())) {
-        li.style.display = "none";
+      for (let i = 0; i < data.length; i++) {
+        const appliance = data[i].appliance.toLowerCase();
+        if (!appliances.includes(appliance)) {
+          appliances.push(appliance);
+        }
+      }
 
-        const newData = data.map((recipe) => {
+      if (appliances.includes(lis[i].dataset.value.toLowerCase())) {
+        lis[i].style.display = "none";
+
+        const newData = [];
+        for (let i = 0; i < data.length; i++) {
+          let recipe = data[i];
           if (recipe.isShow) {
             const allAppliances = recipe.appliance.toLowerCase();
             recipe.isShow = allAppliances.includes(
-              li.dataset.value.toLowerCase()
+              lis[i].dataset.value.toLowerCase()
             );
           }
-          return recipe;
-        });
+          newData.push(recipe);
+        }
+
         setLocaleStorage(newData);
         displayCards();
         // mettre a jours les 2 autres selects
@@ -232,5 +268,5 @@ export const handleApplianceSelect = () => {
         updateIngredientSelect(newData);
       }
     });
-  });
+  }
 };

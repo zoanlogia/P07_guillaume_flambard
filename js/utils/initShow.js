@@ -6,9 +6,9 @@ import recipes from "../../data/recipes.js";
  * true
  */
 export const initRecipes = () => {
-  const updatedRecipes = recipes.map((recipe) => ({
-    ...recipe,
-    isShow: true,
-  }));
+  const updatedRecipes = [];
+  for (let i = 0; i < recipes.length; i++) {
+    updatedRecipes.push({ ...recipes[i], isShow: true });
+  }
   setLocaleStorage(updatedRecipes);
 };

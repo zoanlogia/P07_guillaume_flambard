@@ -41,24 +41,31 @@ export const drawLi = (value) => {
         document.querySelector(".error").remove();
       }
       let data = getLocaleStorage();
-      let ingredients = [
-        ...new Set(
-          data.flatMap((recipe) =>
-            recipe.ingredients.flatMap((ing) => ing.ingredient.toLowerCase())
-          )
-        ),
-      ];
+      let ingredients = [];
+      for (let i = 0; i < data.length; i++) {
+        let recipe = data[i];
+        for (let j = 0; j < recipe.ingredients.length; j++) {
+          let ing = recipe.ingredients[j].ingredient.toLowerCase();
+          if (!ingredients.includes(ing)) {
+            ingredients.push(ing);
+          }
+        }
+      }
 
       if (ingredients.includes(clickedIng)) {
-        const newData = data.map((recipe) => {
+        const newData = [];
+        for (let i = 0; i < data.length; i++) {
+          let recipe = data[i];
           if (recipe.isShow) {
-            const allIng = recipe.ingredients.map((ing) =>
-              ing.ingredient.toLowerCase()
-            );
+            let allIng = [];
+            for (let j = 0; j < recipe.ingredients.length; j++) {
+              let ing = recipe.ingredients[j].ingredient.toLowerCase();
+              allIng.push(ing);
+            }
             recipe.isShow = allIng.includes(li.dataset.value);
           }
-          return recipe;
-        });
+          newData.push(recipe);
+        }
 
         setLocaleStorage(newData);
         displayCards();
@@ -74,26 +81,33 @@ export const drawLi = (value) => {
         document.querySelector(".error").remove();
       }
       const data = getLocaleStorage();
-      const ustensils = [
-        ...new Set(
-          data.map((ustensil) =>
-            ustensil.ustensils.flatMap((ust) => ust.toLowerCase())
-          )
-        ),
-      ].flat();
+      const ustensils = [];
+      for (let i = 0; i < data.length; i++) {
+        let recipe = data[i];
+        for (let j = 0; j < recipe.ustensils.length; j++) {
+          let ust = recipe.ustensils[j].toLowerCase();
+          if (!ustensils.includes(ust)) {
+            ustensils.push(ust);
+          }
+        }
+      }
 
       if (ustensils.includes(li.dataset.value.toLowerCase())) {
-        const newData = data.map((recipe) => {
+        const newData = [];
+        for (let i = 0; i < data.length; i++) {
+          let recipe = data[i];
           if (recipe.isShow) {
-            const allUstensils = recipe.ustensils.map((ustensil) =>
-              ustensil.toLowerCase()
-            );
+            let allUstensils = [];
+            for (let j = 0; j < recipe.ustensils.length; j++) {
+              let ust = recipe.ustensils[j].toLowerCase();
+              allUstensils.push(ust);
+            }
             recipe.isShow = allUstensils.includes(
               li.dataset.value.toLowerCase()
             );
           }
-          return recipe;
-        });
+          newData.push(recipe);
+        }
 
         setLocaleStorage(newData);
         displayCards();
@@ -111,20 +125,27 @@ export const drawLi = (value) => {
       }
 
       const data = getLocaleStorage();
-      const appliances = [
-        ...new Set(data.map((appliance) => appliance.appliance.toLowerCase())),
-      ];
+      const appliances = [];
+      for (let i = 0; i < data.length; i++) {
+        let recipe = data[i];
+        let appliance = recipe.appliance.toLowerCase();
+        if (!appliances.includes(appliance)) {
+          appliances.push(appliance);
+        }
+      }
 
       if (appliances.includes(li.dataset.value.toLowerCase())) {
-        const newData = data.map((recipe) => {
+        const newData = [];
+        for (let i = 0; i < data.length; i++) {
+          let recipe = data[i];
           if (recipe.isShow) {
-            const allAppliances = recipe.appliance.toLowerCase();
+            let allAppliances = recipe.appliance.toLowerCase();
             recipe.isShow = allAppliances.includes(
               li.dataset.value.toLowerCase()
             );
           }
-          return recipe;
-        });
+          newData.push(recipe);
+        }
 
         setLocaleStorage(newData);
         displayCards();

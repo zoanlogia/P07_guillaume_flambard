@@ -23,16 +23,30 @@ export const handleTags = (tag) => {
 
     const tagsLeft = Array.from(document.querySelectorAll(".tag"));
 
-    const tagsLeftValue = tagsLeft.map((t) => {
-      const p = t.querySelector("p");
-      return p.dataset.value.toLowerCase();
-    });
+    const tagsLeftValue = [];
 
-    const newData = DATA.map((recipe) => {
-      const recipIng = recipe.ingredients.map((ing) =>
-        ing.ingredient.toLowerCase()
-      );
-      const recipUst = recipe.ustensils.map((ust) => ust.toLowerCase());
+    for (let i = 0; i < tagsLeft.length; i++) {
+      const p = tagsLeft[i].querySelector("p");
+      tagsLeftValue.push(p.dataset.value.toLowerCase());
+    }
+
+    const newData = [];
+
+    for (let i = 0; i < DATA.length; i++) {
+      const recipe = DATA[i];
+      const recipIng = [];
+      const recipUst = [];
+
+      for (let j = 0; j < recipe.ingredients.length; j++) {
+        const ing = recipe.ingredients[j];
+        recipIng.push(ing.ingredient.toLowerCase());
+      }
+
+      for (let j = 0; j < recipe.ustensils.length; j++) {
+        const ust = recipe.ustensils[j];
+        recipUst.push(ust.toLowerCase());
+      }
+
       const recipApp = recipe.appliance.toLowerCase();
 
       if (tagsLeftValue.length === 0) {
@@ -45,8 +59,9 @@ export const handleTags = (tag) => {
             recipApp.includes(el)
         );
       }
-      return recipe;
-    });
+
+      newData.push(recipe);
+    }
 
     setLocaleStorage(newData);
     displayCards();

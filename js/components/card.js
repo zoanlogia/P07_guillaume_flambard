@@ -69,21 +69,26 @@ const colDesc = (recipe) => {
 
 const colIngredients = (recipe) => {
   const ingredients = recipe.ingredients.filter((ing) => ing.ingredient);
-  const ingredientsHTML = ingredients
-    .map((ing) => {
-      let liHTML = `<b>${ing.ingredient}</b>`;
+  let ingredientsHTML = "";
 
-      if (ing.quantity !== undefined || ing.unit !== undefined) {
-        let quantityHTML = ing.quantity
-          ? `<span class="small">${ing.quantity}</span>`
-          : "";
-        let unitHTML = ing.unit ? `<span class="small">${ing.unit}</span>` : "";
-        liHTML += ` : ${quantityHTML}${unitHTML}`;
-      }
+  for (let i = 0; i < ingredients.length; i++) {
+    let liHTML = `<b>${ingredients[i].ingredient}</b>`;
 
-      return `<li class="ingredient">${liHTML}</li>`;
-    })
-    .join("");
+    if (
+      ingredients[i].quantity !== undefined ||
+      ingredients[i].unit !== undefined
+    ) {
+      let quantityHTML = ingredients[i].quantity
+        ? `<span class="small">${ingredients[i].quantity}</span>`
+        : "";
+      let unitHTML = ingredients[i].unit
+        ? `<span class="small">${ingredients[i].unit}</span>`
+        : "";
+      liHTML += ` : ${quantityHTML}${unitHTML}`;
+    }
+
+    ingredientsHTML += `<li class="ingredient">${liHTML}</li>`;
+  }
 
   return `
     <ul class="ingredients">${ingredientsHTML}</ul>

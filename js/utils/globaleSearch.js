@@ -14,7 +14,9 @@ export const globaleSearch = () => {
     const DATA = getLocaleStorage();
 
     if (e.target.value.length >= 3) {
-      const RecipesToDisplay = DATA.map((recipe) => {
+      const RecipesToDisplay = [];
+      for (let i = 0; i < DATA.length; i++) {
+        const recipe = DATA[i];
         const searchTerm = e.target.value.toLowerCase();
         const matchesSearchTerm =
           recipe.name.toLowerCase().includes(searchTerm) ||
@@ -27,20 +29,25 @@ export const globaleSearch = () => {
           recipe.appliance.toLowerCase().includes(searchTerm) ||
           recipe.description.toLowerCase().includes(searchTerm);
 
-        return {
+        RecipesToDisplay.push({
           ...recipe,
           isShow: matchesSearchTerm,
-        };
-      });
+        });
+      }
       setLocaleStorage(RecipesToDisplay);
     } else {
-      const RecipesToDisplay = DATA.map((recipe) => ({
-        ...recipe,
-        isShow: true,
-      }));
+      const RecipesToDisplay = [];
+      for (let i = 0; i < DATA.length; i++) {
+        const recipe = DATA[i];
+        RecipesToDisplay.push({
+          ...recipe,
+          isShow: true,
+        });
+      }
       containerTags.innerHTML = "";
       setLocaleStorage(RecipesToDisplay);
     }
+
     lists.filter((li) => {
       return li.textContent.toLowerCase().includes(e.target.value.toLowerCase())
         ? (li.style.display = "block")

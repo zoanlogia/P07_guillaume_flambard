@@ -11,9 +11,11 @@ export const displayCards = () => {
   const cardsContainer = document.querySelector(".recipes__container");
   cardsContainer.innerHTML = "";
 
-  data.map((recipe) => {
+  for (let i = 0; i < data.length; i++) {
+    const recipe = data[i];
     cardsContainer.innerHTML += card(recipe);
-  });
+  }
+
   if (cardsContainer.innerHTML === "") {
     cardsContainer.append(errorMessage());
   }
