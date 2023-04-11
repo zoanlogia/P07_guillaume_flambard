@@ -1,6 +1,10 @@
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
 import { displayCards } from "./ui.js";
 
+/**
+ * The function enables global search functionality for a recipe website by filtering recipes based on
+ * user input and displaying matching results.
+ */
 export const globaleSearch = () => {
   const searchbar = document.querySelector("#searchbar");
   const containerTags = document.querySelector(".tags__container");

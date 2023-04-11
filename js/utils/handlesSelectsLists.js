@@ -1,6 +1,5 @@
 import { drawLi } from "../components/createLists.js";
 import { updateListOnInput } from "./selectInput.js";
-// import { handleInputSelects } from "./handleSelectsInputs.js";
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
 import { displayCards } from "./ui.js";
 import {
@@ -9,6 +8,10 @@ import {
   updateUstensilSelect,
 } from "./updateSelect.js";
 
+/**
+ * This function handles the selection of ingredients by displaying a dropdown list of available
+ * ingredients and updating the recipe cards based on the selected ingredient.
+ */
 export const handleIngredientSelect = () => {
   const button = document.getElementById("selectIngredient");
   const arrow = button.querySelector(".arrow");

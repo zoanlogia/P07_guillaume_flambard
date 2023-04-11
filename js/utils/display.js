@@ -1,9 +1,11 @@
 import { getLocaleStorage, setLocaleStorage } from "./storage.js";
-// import recipes from "../../data/recipes.js";
 
+/**
+ * The function sets the "isShow" property of all recipes in local storage to true.
+ */
 export const isShow = () => {
- const recipes = getLocaleStorage()
-  recipes.forEach(recipe => {
+  const recipes = getLocaleStorage();
+  recipes.map((recipe) => {
     recipe.isShow = true;
   });
   setLocaleStorage(recipes);

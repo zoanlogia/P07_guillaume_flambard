@@ -7,6 +7,12 @@ import {
   updateUstensilSelect,
 } from "./updateSelect.js";
 
+/**
+ * This function handles the removal of a tag and updates the recipe display based on the remaining
+ * tags.
+ * @param tag - The `tag` parameter is a DOM element representing a tag that has been added to a recipe
+ * filter.
+ */
 export const handleTags = (tag) => {
   const close = tag.querySelector(".tag__close");
 

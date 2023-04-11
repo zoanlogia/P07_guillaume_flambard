@@ -1,3 +1,11 @@
+/**
+ * The function returns a card HTML element for a recipe if it is set to be shown.
+ * @param recipe - The `recipe` parameter is an object that contains information about a recipe,
+ * including its title, image, ingredients, and instructions. The `isShow` property is a boolean value
+ * that determines whether or not the recipe should be displayed on the page.
+ * @returns If `recipe.isShow` is true, a card HTML element with the heading, body, and row sections
+ * will be returned. If `recipe.isShow` is false, an empty string will be returned.
+ */
 export const card = (recipe) => {
   if (recipe.isShow) {
     return `
@@ -8,7 +16,7 @@ export const card = (recipe) => {
       </div>
     `;
   } else {
-    return ""
+    return "";
   }
 };
 

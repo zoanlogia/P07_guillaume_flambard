@@ -1,3 +1,6 @@
+/**
+ * This function updates a list of items based on user input in a search bar.
+ */
 export const updateListOnInput = () => {
   const inputs = Array.from(
     document.querySelectorAll(".select input[type='search']")

@@ -12,6 +12,14 @@ import {
   createTagsUstensils,
 } from "./tag.js";
 
+/**
+ * The function creates a list item element with specific properties and an onclick event that updates
+ * the displayed recipes based on the selected ingredient, ustensil, or appliance.
+ * @param value - The value parameter is a string representing the text content of the list item that
+ * will be created.
+ * @returns The function `drawLi` returns a newly created `li` element with some properties and an
+ * `onclick` event listener.
+ */
 export const drawLi = (value) => {
   const li = document.createElement("li");
 
@@ -120,7 +128,6 @@ export const drawLi = (value) => {
 
         setLocaleStorage(newData);
         displayCards();
-        // mettre a jours les 2 autres selects
         updateApplianceSelect(newData);
         updateUstensilSelect(newData);
         updateIngredientSelect(newData);
